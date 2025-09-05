@@ -1,0 +1,141 @@
+/* General Styles */
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+  background-color: #121212 !important;
+  color: #f1f1f1 !important;
+}
+
+.dark-mode .card {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.dark-mode .navbar,
+.dark-mode .modal-content {
+  background-color: #2a2a2a;
+  color: white;
+}
+
+.dark-mode .btn-outline-secondary {
+  color: white;
+  border-color: white;
+}
+
+.dark-mode .btn-outline-secondary:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Loader Spinner */
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 3rem;
+  height: 3rem;
+  border: 0.5rem solid #ccc;
+  border-top: 0.5rem solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom Alert Box */
+.custom-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  z-index: 10000;
+  opacity: 1;
+  animation: fadeSlide 0.5s ease, disappear 0.5s ease 3s forwards;
+}
+
+/* Alert Themes */
+.custom-alert.success {
+  background-color: #198754;
+  color: white;
+}
+
+.custom-alert.error {
+  background-color: #dc3545;
+  color: white;
+}
+
+.custom-alert.info {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* Slide + Fade Animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes disappear {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Recipe Cards */
+.card img {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Tag Buttons */
+#filterTags .btn {
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+}
+
+/* Pagination Buttons */
+#pagination .btn {
+  min-width: 100px;
+}
+
+/* Modal content style */
+.modal-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+
+
+
+

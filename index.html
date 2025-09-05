@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Recipe World</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <style>
+    /* === Video Background === */
+    #bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      min-width: 100%; min-height: 100%;
+      object-fit:cover;
+      z-index: -1;
+    }
+    
+    .overlay {
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+      padding: 1px;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    body, html {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      padding: 80px 20px;
+    }
+
+    .bg-dark-transparent {
+      background-color: rgba(0,0,0,0.8);
+      color: #fff;
+    }
+
+    .footer {
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    input.form-control, textarea.form-control {
+      background-color: rgba(255,255,255,0.8);
+    }
+
+    .btn-subscribe {
+      margin-top: 10px;
+    }
+
+    /* === Dark Mode === */
+    .dark-mode {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    /* === Scroll to Top Button === */
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 50%;
+    }
+
+    #scrollTopBtn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Background Video -->
+  <video autoplay muted loop id="bg-video">
+    <source src="recipe food.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- ✅ Top Buttons -->
+  <div class="position-fixed top-0 end-0 m-3 z-3 display-4">
+        <a href="register.html" class="btn btn-primary btn-lg me-2" >Register</a>
+        <a href="login.html" class="btn btn-success btn-lg">Login</a>
+  </div>
+
+  <!-- ✅ Main Overlay -->
+  <div class="overlay d-flex align-items-center justify-content-center text-center vh-100">
+    <div>
+      <h1 class="display-4 fw-bold mb-4 animate-fadeIn">🍲 Welcome to Recipe World!</h1>
+      <p class="lead mb-4 animate-fadeIn">Discover, save, and cook your favorite meals easily.</p>
+    </div>
+  </div>
+
+
+  <!-- ✅ About Section -->
+  <section class="bg-dark-transparent text-center">
+    <div class="container">
+      <h2 class="mb-4">About Us</h2>
+      <p>At Recipe World, we bring together the best global recipes with an easy-to-use platform. Whether you're a home cook or a foodie explorer, we have something delicious waiting for you.</p>
+    </div>
+  </section>
+
+  <!-- ✅ Features Section -->
+  <section class="text-center bg-light">
+    <div class="container">
+      <h2 class="mb-4">Why Choose Us?</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h4>🍛 1000+ Recipes</h4>
+          <p>From Indian curries to Italian pasta, we've got you covered.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4>❤️ Save Favorites</h4>
+          <p>Keep track of what you love and revisit anytime.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4>🔎 Smart Search</h4>
+          <p>Search by ingredients, meal type, or cuisine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Newsletter -->
+  <section class="bg-dark-transparent text-white text-center">
+    <div class="container">
+      <h2 class="mb-4">📬 Stay Updated!</h2>
+      <p>Subscribe to get new recipes, healthy tips, and cooking hacks every week.</p>
+      <form class="row justify-content-center">
+        <div class="col-md-6">
+          <input type="email" class="form-control" placeholder="Enter your email..." required />
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-warning btn-subscribe">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ✅ Footer -->
+  <footer class="footer">
+    <p>© 2025 Recipe World. Made with ❤️ for food lovers.</p>
+  </footer>
+
+  <!-- ✅ Scroll to Top Button -->
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">⬆</button>
+
+  <!-- ✅ Recipe Suggestion Modal -->
+  <div class="modal fade" id="aiRecipeModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title">🧠 AI Recipe Suggestion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p id="suggestionText">Loading...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- <script>
+    // 🌙 Dark Mode Toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // 🔝 Scroll to Top Button Logic
+    const scrollBtn = document.getElementById("scrollTopBtn");
+    window.onscroll = () => {
+      scrollBtn.style.display = (document.documentElement.scrollTop > 300) ? "block" : "none";
+    };
+    function scrollToTop() {
+      document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // 🧠 AI Recipe Name Suggestion
+    const recipes = ["Creamy Garlic Chicken", "Paneer Butter Masala", "Mango Lassi", "Spaghetti Aglio e Olio", "Tofu Stir Fry", "Avocado Smoothie"];
+    function openAIModal() {
+      const random = recipes[Math.floor(Math.random() * recipes.length)];
+      document.getElementById("suggestionText").innerText = "Try making: " + random + "!";
+      new bootstrap.Modal(document.getElementById("aiRecipeModal")).show();
+    }
+  </script> -->
+  <script src="script.js"></script>
+</body>
+</html>
